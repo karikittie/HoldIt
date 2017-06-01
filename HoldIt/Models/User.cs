@@ -7,11 +7,11 @@ namespace HoldIt.Models
 {
     public class User
     {
-        public User(String email, String name)
+        public User(String email, String name, int id)
         {
             this.email = email;
             this.name = name;
-            // TODO: add a way to generate ID from Database Schema
+            this.userID = id;
         }
         private String email { get; set; }
         private String name { get; set; }
