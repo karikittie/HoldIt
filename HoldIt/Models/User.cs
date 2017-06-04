@@ -13,9 +13,9 @@ namespace HoldIt.Models
             this.name = name;
             this.userID = id;
         }
-        private String email { get; set; }
-        private String name { get; set; }
-        private int userID { get; }
+        public String email;
+        private String name;
+        private int userID;
         private SortedList reviews;
     }
 }
