@@ -10,13 +10,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>User</h4>
+        <h4>User Login</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="email" placeholder="email" name="email" class="input-lg form-control" />
-                <input type="password" placeholder="password" name="password" class="input-lg form-control" />
+                <input type="email" placeholder="email" name="email" class="input-lg form-control mb" />
+                <input type="password" placeholder="password" name="password" class="input-lg form-control mb" />
                 <input type="submit" value="Login" class="btn btn-default" />
             </div>
         </div>
