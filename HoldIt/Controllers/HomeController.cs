@@ -15,26 +15,6 @@ namespace HoldIt.Controllers
             return View();
         }
 
-        /*
-         * Password should be handed off to our auth. API
-         * which should give us a user ID of some sort to attach to the account
-         * */
-        [HttpPost]
-        public ActionResult Index(String name, String email, String password, String passwordConfirm)
-        {
-            int id = -1;
-            if(!password.Equals(passwordConfirm))
-            {
-                // TODO: handle error
-            }
-            if(id < 0)
-            {
-                // TODO: handle error
-            }
-            User newUser = new User(email, name, id);
-            return View();
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

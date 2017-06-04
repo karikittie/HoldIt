@@ -8,6 +8,12 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @if(TempData["ErrorAlert"] != null)
+    {
+        <script>
+            window.alert("@TempData["ErrorAlert"]");
+        </script>
+    }
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -44,7 +50,7 @@
                         <div class="form-group">
                             <input type="password" placeholder="Password" name="password" class="form-control">
                         </div>
-                        <button type="submit" formaction="User/Login" formmethod="post" class="btn btn-success">Sign in</button>
+                        <button type="submit" formaction="@Url.Action("Login", "User")" formmethod="post" class="btn btn-success">Sign in</button>
                     </form>
                 </div>
             }
