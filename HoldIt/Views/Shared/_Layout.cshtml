@@ -27,26 +27,27 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
+                    @if (Session["userIsAuthenticated"] != null && (bool)Session["userIsAuthenticated"])
+                    {
+                        <li>@Html.ActionLink("Log out", "Logout", "User")</li>
+                    }
                 </ul>
             </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                @if ((bool)Session["userIsAuthenticated"])
-                {
-                    <button type="button" formaction="User/Logout" formmethod="get" class="btn btn-success">Log out</button>
-                }
-                else
-                {
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="email" placeholder="Email" name="email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" name="password" class="form-control">
-                    </div>
-                    <button type="submit" formaction="User/Login" formmethod="post" class="btn btn-success">Sign in</button>
-                </form>
-                }
-            </div>
+
+            @if (Session["userIsAuthenticated"] == null || !(bool)Session["userIsAuthenticated"])
+            {
+                <div id="navbar" class="collapse navbar-collapse">
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" name="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" name="password" class="form-control">
+                        </div>
+                        <button type="submit" formaction="User/Login" formmethod="post" class="btn btn-success">Sign in</button>
+                    </form>
+                </div>
+            }
         </div>
     </nav>
 

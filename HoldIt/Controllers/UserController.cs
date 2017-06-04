@@ -27,6 +27,7 @@ namespace HoldIt.Controllers
             if(validUser(email, password))
             {
                 FormsAuthentication.SetAuthCookie(email, false);
+                Session["userIsAuthenticated"] = true;
                 return Redirect("/User/Index");
             }
             return View();
@@ -35,6 +36,7 @@ namespace HoldIt.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session["userIsAuthenticated"] = false;
             return Redirect("/Home/Index");
         }
 
