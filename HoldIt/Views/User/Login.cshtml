@@ -1,6 +1,4 @@
-﻿@model HoldIt.Models.User
-
-@{
+﻿@{
     ViewBag.Title = "Login";
 }
 
@@ -17,7 +15,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="email" placeholder="email" name="email" class="input-lg form-control" />
+                <input type="password" placeholder="password" name="password" class="input-lg form-control" />
+                <input type="submit" value="Login" class="btn btn-default" />
             </div>
         </div>
     </div>

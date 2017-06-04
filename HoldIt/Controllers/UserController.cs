@@ -22,11 +22,11 @@ namespace HoldIt.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(String email, String password)
         {
-            if(validUser(user))
+            if(validUser(email, password))
             {
-                FormsAuthentication.SetAuthCookie(user.email, false);
+                FormsAuthentication.SetAuthCookie(email, false);
                 return Redirect("/User/Index");
             }
             return View();
@@ -38,9 +38,9 @@ namespace HoldIt.Controllers
             return Redirect("/Home/Index");
         }
 
-        private bool validUser(User user)
+        private bool validUser(String email, String password)
         {
-            // DO VALIDATION HERE
+            // DO DATABASE VALIDATION HERE
             return true;
         }
     }
