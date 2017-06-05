@@ -118,5 +118,29 @@ namespace HoldIt.Controllers
 
             return Redirect("/User/Index");
         }
+
+        public ActionResult Confirm(int first)
+        {
+            Listing list;
+
+            list = ((List<Listing>)Session["ListingList"]).Find((Listing l) => l.ListingID == first);
+            if ((list != null) && (list.providerID == first))
+            {
+                List<Listing> tempList = (List<Listing>)Session["ListingList"];
+                int pos = tempList.FindIndex(list.Equals);
+                list.confirmed = true;
+
+                tempList[pos] = list;
+                Session["ListingList"] = tempList;
+
+            }
+            else
+            {
+                throw new SystemException("ID");
+
+            }
+            return Redirect("/User/Index");
+
+        }
     }
 }
