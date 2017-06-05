@@ -31,7 +31,7 @@
                 <input type="password" name="password" placeholder="choose a password" class="form-control mb" />
                 <input type="password" name="passwordConfirm" placeholder="confirm your password" class="form-control mb" />
             </div>
-            <button type="submit" class="btn btn-success">@Html.ActionLink("sign me up!", "Index", "Home")</button>
+            <button type="submit" formaction="@Url.Action("Signup", "User")" formmethod="post" class="btn btn-success">Sign me up!</button>
         </form>
     </div>
     <div class="col-md-4">
