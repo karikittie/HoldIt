@@ -89,17 +89,34 @@ namespace HoldIt.Controllers
             
         }
 
-        public ActionResult Book( int listID )
+        public global::System.Web.Mvc.ActionResult Book(int? first)
         {
-            Listing list;
+            if (first != null)
+            {
+                int listID = (int)first;
+                //Int32.TryParse(id, out listID);
+                Listing list;
+
+                var t = TempData;
+                list = ((List<Listing>)Session["ListingList"]).Find((Listing l) => l.ListingID == listID);
+                if ((list != null) && (list.customerID < 0))
+                {
+                    List<Listing> tempList = (List<Listing>)Session["ListingList"];
+                    int pos = tempList.FindIndex(list.Equals);
+                    list.customerID = ((User)Session["ActiveUser"]).UserID;
+
+                    tempList[pos] = list;
+                    Session["ListingList"] = tempList;
+                }
+                else
+                {
+                    throw new SystemException("ID");
+
+                }
+            }
 
 
-            list = ((List<Listing>) Session["ListingList"]).Find(  (Listing l) => l.ListingID== listID);
-
-
-
-            return View( list );
+            return Redirect("/User/Index");
         }
-
     }
 }

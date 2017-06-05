@@ -1,4 +1,5 @@
-﻿@model IEnumerable<HoldIt.Models.Listing>
+﻿@using System.Collections
+@model IEnumerable<HoldIt.Models.Listing>
     
 
 @if ((Session["userIsAuthenticated"] != null) && ((bool) Session["userIsAuthenticated"] == true) )
@@ -37,8 +38,12 @@
         </td>
         <td>
             
-            @if (( Session["userIsAuthenticated"] != null ) && ((bool)Session["userIsAuthenticated"] == true) &&(item.customerID < 0))
-            {@Html.ActionLink("Book", "User/Book",  item.ListingID )}
+            @if ((Session["userIsAuthenticated"] != null) && ((bool)Session["userIsAuthenticated"] == true) && (item.customerID < 0))
+            {
+                <a href="Book" class="btn active" role="button" aria-pressed="true"  asp-controller="Home" asp-action="Book" asp-route-yourparam0=@item.ListingID >Book</a>
+
+                @Html.ActionLink("Book","Book","User",null, new{ first=item.ListingID})
+            }
         </td>
     </tr>
 }
