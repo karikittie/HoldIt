@@ -40,9 +40,7 @@
             
             @if ((Session["userIsAuthenticated"] != null) && ((bool)Session["userIsAuthenticated"] == true) && (item.customerID < 0))
             {
-                <a href="Book" class="btn active" role="button" aria-pressed="true"  asp-controller="Home" asp-action="Book" asp-route-yourparam0=@item.ListingID >Book</a>
-
-                @Html.ActionLink("Book","Book","User",null, new{ first=item.ListingID})
+                @Html.ActionLink("Book","Book","User",  new { @first = item.ListingID},null)
             }
         </td>
     </tr>
