@@ -5,7 +5,7 @@
 @if ((Session["userIsAuthenticated"] != null) && ((bool) Session["userIsAuthenticated"] == true) )
 {
     <p>
-        @Html.ActionLink("Create New", "User/Create")
+        @Html.ActionLink("Create New", "CreateListing", "User")
     </p>
 }
 <table class="table">
