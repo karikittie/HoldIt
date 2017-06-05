@@ -1,31 +1,19 @@
 ﻿@model IEnumerable<HoldIt.Models.Listing>
+    
 
-<p>
-    @Html.ActionLink("Create New", "User/Create")
-</p>
+@if ((Session["userIsAuthenticated"] != null) && ((bool) Session["userIsAuthenticated"] == true) )
+{
+    <p>
+        @Html.ActionLink("Create New", "User/Create")
+    </p>
+}
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.datetime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.providerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.customerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.location)
-        </th>
+        <th>Date Time</th>
+        <th>Cost </th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Location</th>
         <th></th>
     </tr>
 
@@ -37,12 +25,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.cost)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.providerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customerID)
-        </td>
+       
         <td>
             @Html.DisplayFor(modelItem => item.title)
         </td>
@@ -54,7 +37,7 @@
         </td>
         <td>
             
-            @if (( Session["userIsAuthenticated"] != null ) && ((bool)Session["userIsAuthenticated"] == true))
+            @if (( Session["userIsAuthenticated"] != null ) && ((bool)Session["userIsAuthenticated"] == true) &&(item.customerID < 0))
             {@Html.ActionLink("Book", "User/Book",  item.ListingID )}
         </td>
     </tr>

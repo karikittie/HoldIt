@@ -94,7 +94,7 @@ namespace HoldIt.Controllers
             Listing list;
 
 
-            ((List<Listing>) Session["ListingList"]).Find(  (Listing l) => l.ListingID== listID);
+            list = ((List<Listing>) Session["ListingList"]).Find(  (Listing l) => l.ListingID== listID);
 
 
 

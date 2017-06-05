@@ -12,21 +12,15 @@ namespace HoldIt.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            MakeListings();
 
-            if (Session["ListingList"] == null)
-            {
-            
+            MakeUsers();
 
-            List<Listing> lList = new List<Listing>();
-
-            lList.Add(new Listing(0, new DateTime(2089, 11, 16), 15.25, 0, -1, "Title0", "Desc0", "Add0"));
-            lList.Add(new Listing(1, new DateTime(2018, 12, 24), 15.25, 0, -1, "Title1", "Desc1", "Add1"));
-            lList.Add(new Listing(2, new DateTime(2017, 7, 4), 15.25, 0, -1, "Title2", "Desc2", "Add2"));
-            lList.Add(new Listing(3, new DateTime(2017, 6, 7), 15.25, 0, -1, "Title3", "Desc3", "Add3"));
-
-            Session["ListingList"] = lList;
+            return View();
         }
 
+        private void MakeUsers()
+        {
             if (Session["UserList"] == null)
             {
                 List<User> uList = new List<User>();
@@ -38,10 +32,21 @@ namespace HoldIt.Controllers
 
                 Session["UserList"] = uList;
             }
+        }
 
+        private void MakeListings()
+        {
+            if (Session["ListingList"] == null)
+            {
+                List<Listing> lList = new List<Listing>();
 
+                lList.Add(new Listing(0, new DateTime(2089, 11, 16), 15.25, 0, 1, "Title0", "Desc0", "Add0"));
+                lList.Add(new Listing(1, new DateTime(2018, 12, 24), 15.25, 1, -1, "Title1", "Desc1", "Add1"));
+                lList.Add(new Listing(2, new DateTime(2017, 7, 4), 15.25, 0, 2, "Title2", "Desc2", "Add2", true));
+                lList.Add(new Listing(3, new DateTime(2017, 6, 7), 15.25, 3, -1, "Title3", "Desc3", "Add3"));
 
-            return View();
+                Session["ListingList"] = lList;
+            }
         }
 
         public ActionResult About()
