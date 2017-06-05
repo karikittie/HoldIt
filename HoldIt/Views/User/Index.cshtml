@@ -1,4 +1,5 @@
-﻿@model HoldIt.Models.User
+﻿@using HoldIt.Models
+@model HoldIt.Models.User
 
 @{
     ViewBag.Title = "index";
@@ -6,9 +7,30 @@
 
 <h2>index</h2>
 
-<div>
-    <h4>My User Page</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
-</div>
+
+@if (Session["ActiveUser"] != null)
+{
+    <div>
+        <table class="table">
+
+            <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td> @(((User)Session["ActiveUser"]).name) </td>
+                <td>Otto</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td> @(((User)Session["ActiveUser"]).email) </td>
+                <td>Thornton</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Password</th>
+                <td> @(((User)Session["ActiveUser"]).password) </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+}

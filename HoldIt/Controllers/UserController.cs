@@ -1,35 +1,37 @@
-﻿using System;
+﻿using global::System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data.Entity.Core.Objects;
+using System.EnterpriseServices;
+using System.Security.Principal;
+using global::System.Linq;
+using global::System.Web;
 using System.Web.Mvc;
-using HoldIt.Models;
+using global::HoldIt.Models;
 using System.Web.Security;
 
 namespace HoldIt.Controllers
 {
-    public class UserController : Controller
+    public class UserController : global::System.Web.Mvc.Controller
     {
         // This is the virtualized object containing all users from the DB
-        private DBContext context = new DBContext();
 
-        [Authorize]
-        public ActionResult Index()
+        [global::System.Web.Mvc.Authorize]
+        public global::System.Web.Mvc.ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Login()
+        public global::System.Web.Mvc.ActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(String email, String password)
+        [global::System.Web.Mvc.HttpPost]
+        public global::System.Web.Mvc.ActionResult Login(global::System.String email, global::System.String password)
         {
             if(validUser(email, password))
             {
-                FormsAuthentication.SetAuthCookie(email, false);
+                global::System.Web.Security.FormsAuthentication.SetAuthCookie(email, false);
                 Session["userIsAuthenticated"] = true;
                 return Redirect("/User/Index");
             }
@@ -37,42 +39,67 @@ namespace HoldIt.Controllers
             return View();
         }
 
-        public ActionResult Logout()
+        public global::System.Web.Mvc.ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            global::System.Web.Security.FormsAuthentication.SignOut();
             Session["userIsAuthenticated"] = false;
             return Redirect("/Home/Index");
         }
 
-        [HttpPost]
-        public ActionResult Signup(String email, String name, String password, String passwordConfirm)
+        [global::System.Web.Mvc.HttpPost]
+        public global::System.Web.Mvc.ActionResult Signup(global::System.String email, global::System.String name, global::System.String password, global::System.String passwordConfirm)
         {
             if(!password.Equals(passwordConfirm))
             {
                 TempData["ErrorAlert"] = "Password and password confirmation do not match";
                 return Redirect("/Home/Index");
             }
-            User newuser = new User();
-            newuser.email = email;
-            newuser.name = name;
-            newuser.password = password;
-            context.users.Add(newuser); // Add new user to local context
-            context.SaveChangesAsync(); // Migrate context to DB
+            User newuser = new User(email,name,password);
+
+            List<User> uList = ((List<User>) Session["UserList"]);
+            uList.Add(newuser);
+            Session["UserList"] = uList;
+
+
             FormsAuthentication.SetAuthCookie(email, false);
             Session["userIsAuthenticated"] = true;
             return Redirect("/User/Index");
         }
 
-        private bool validUser(String email, String password)
+
+        private bool validUser(System.String email, String password)
         {
+            List<User> uList = ((List<User>) Session["UserList"]);
+
             // Finds a given user from the DB and checks password
-            User foundUser;
+            global::HoldIt.Models.User foundUser;
             try
             {
-                foundUser = (User)context.users.Where(user => user.email == email).Single();
+                foundUser = uList.Find( u => (u.email.Equals(email)));
+                Session["ActiveUser"] = foundUser;
+
+                if (foundUser.password.Equals(password))
+                {
+                    return true;
+                }
+                return false;
+
             } catch(Exception e) { return false; }
-            if (foundUser.password == password) return true;
-            return false;
+
+            
         }
+
+        public ActionResult Book( int listID )
+        {
+            Listing list;
+
+
+            ((List<Listing>) Session["ListingList"]).Find(  (Listing l) => l.ListingID== listID);
+
+
+
+            return View( list );
+        }
+
     }
 }

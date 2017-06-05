@@ -8,6 +8,22 @@ namespace HoldIt.Models
 {
     public class Listing
     {
+        public Listing(int listingId, DateTime datetime, double cost, int providerId, int customerId, string title,
+            string description, String location)
+        {
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (description == null) throw new ArgumentNullException(nameof(description));
+            if (location == null) throw new ArgumentNullException(nameof(location));
+            ListingID = listingId;
+            this.datetime = datetime;
+            this.cost = cost;
+            providerID = providerId;
+            customerID = customerId;
+            this.title = title;
+            this.description = description;
+            this.location = location;
+        }
+
         public int ListingID { get; set; }
         public DateTime datetime { get; set; }
         public double cost { get; set; }
@@ -15,6 +31,6 @@ namespace HoldIt.Models
         public int customerID { set; get; }
         public String title { set; get; }
         public String description { set; get; }
-        public Location location { set; get; }
+        public String location { set; get; }
     }
 }
