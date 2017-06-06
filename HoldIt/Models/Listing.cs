@@ -22,6 +22,7 @@ namespace HoldIt.Models
             this.title = title;
             this.description = description;
             this.location = location;
+            this.confirmed = false;
         }
 
         public Listing(int listingId, DateTime datetime, double cost, int providerId, int customerId, string title,
@@ -39,6 +40,14 @@ namespace HoldIt.Models
             this.description = description;
             this.location = location;
             this.confirmed = b;
+        }
+
+        public Listing()
+        {
+
+            providerID = -1;
+            customerID = -1;
+            this.confirmed = false;
         }
 
         public int ListingID { get; set; }

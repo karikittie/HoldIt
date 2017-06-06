@@ -19,6 +19,7 @@ namespace HoldIt.Controllers
             return View();
         }
 
+        //TODO fill in better information
         private void MakeUsers()
         {
             if (Session["UserList"] == null)
@@ -33,17 +34,17 @@ namespace HoldIt.Controllers
                 Session["UserList"] = uList;
             }
         }
-
+        //TODO fill in better information
         private void MakeListings()
         {
             if (Session["ListingList"] == null)
             {
                 List<Listing> lList = new List<Listing>();
 
-                lList.Add(new Listing(0, new DateTime(2089, 11, 16), 15.25, 0, 1, "Title0", "Desc0", "Add0"));
-                lList.Add(new Listing(1, new DateTime(2018, 12, 24), 15.25, 1, -1, "Title1", "Desc1", "Add1"));
+                lList.Add(new Listing(0, new DateTime(2089, 11, 16), 15.25, 0, -1, "Title0", "Desc0", "Add0", false));
+                lList.Add(new Listing(1, new DateTime(2018, 12, 24), 15.25, 1, -1, "Title1", "Desc1", "Add1",false));
                 lList.Add(new Listing(2, new DateTime(2017, 7, 4), 15.25, 0, 2, "Title2", "Desc2", "Add2", true));
-                lList.Add(new Listing(3, new DateTime(2017, 6, 7), 15.25, 3, -1, "Title3", "Desc3", "Add3"));
+                lList.Add(new Listing(3, new DateTime(2017, 6, 7), 15.25, 3, -1, "Title3", "Desc3", "Add3",false));
 
                 Session["ListingList"] = lList;
             }
@@ -63,9 +64,24 @@ namespace HoldIt.Controllers
             return View();
         }
 
-        public ActionResult SearchListing()
+        public ActionResult SearchListing(String search)
         {
-            throw new NotImplementedException();
+            List<Listing> listings = (List<Listing>) Session["ListingList"];
+            List<Listing> searchedList = new List<Listing>();
+            search = search.ToLower();
+            foreach (Listing listing in listings)
+            {
+                if (listing.customerID >= 0) continue;
+                if (listing.title.ToLower().Contains(search))
+                    searchedList.Add(listing);
+                else if (listing.description.ToLower().Contains(search))
+                    searchedList.Add(listing);
+                else if (listing.location.ToLower().Contains(search))
+                    searchedList.Add(listing);
+            }
+
+
+            return View(searchedList);
         }
 
         public ActionResult ListingList()

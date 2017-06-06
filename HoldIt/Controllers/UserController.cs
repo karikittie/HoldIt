@@ -43,6 +43,8 @@ namespace HoldIt.Controllers
         {
             global::System.Web.Security.FormsAuthentication.SignOut();
             Session["userIsAuthenticated"] = false;
+            Session["ActiveUser"] = null;
+
             return Redirect("/Home/Index");
         }
 
@@ -63,12 +65,16 @@ namespace HoldIt.Controllers
 
             FormsAuthentication.SetAuthCookie(email, false);
             Session["userIsAuthenticated"] = true;
+            Session["ActiveUser"] = newuser;
+
+
             return Redirect("/User/Index");
         }
 
 
         private bool validUser(System.String email, String password)
         {
+
             List<User> uList = ((List<User>) Session["UserList"]);
 
             // Finds a given user from the DB and checks password
@@ -99,6 +105,7 @@ namespace HoldIt.Controllers
 
                 var t = TempData;
                 list = ((List<Listing>)Session["ListingList"]).Find((Listing l) => l.ListingID == listID);
+                //TODO check for provider == Customer
                 if ((list != null) && (list.customerID < 0))
                 {
                     List<Listing> tempList = (List<Listing>)Session["ListingList"];
@@ -143,8 +150,9 @@ namespace HoldIt.Controllers
 
         }
 
-        public ActionResult CreateListing()
+        public ActionResult CreateListing(  )
         {
+
 
 
             return View();
@@ -153,7 +161,6 @@ namespace HoldIt.Controllers
         [HttpPost]
         public ActionResult Create(Listing lList)
         {
-            throw new SystemException(lList.ToString());
             int first = 1;
             Listing list;
 
@@ -176,6 +183,26 @@ namespace HoldIt.Controllers
             return Redirect("/User/Index");
 
 
+        }
+
+        [HttpPost]
+        public ActionResult MakeListing( Listing list )
+        {
+
+            list.providerID = ((User) Session["ActiveUser"]).UserID;
+            list.customerID = -1;
+            list.confirmed = false;
+
+            List<Listing> listing;
+
+            listing = ((List<Listing>) Session["ListingList"]);
+
+            listing.Add(list);
+
+            Session["ListingList"] = listing; 
+
+
+            return Redirect("Index");
         }
     }
 }
