@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace HoldIt.Models
 {
+    /// <summary>
+    /// Event: A HoldIt featured event.
+    /// </summary>
     public class Event
     {
-        public Event(String addr, String state, String cntr, String title, String descr, DateTime time)
-        {
-            this.location = new Location(addr, state, cntr);
-            this.title = title;
-            this.description = descr;
-            this.datetime = time;
-        }
-        private Location location { get; }
-        private String title { get; }
-        private String description { set; get; }
-        private DateTime datetime { get; }
+        public int EventID { get; set; }
+        public int locationID { get; set; }
+        public String title { get; set; }
+        public String description { get; set; }
+        public DateTime datetime { get; set; }
     }
 }

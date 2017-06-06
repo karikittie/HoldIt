@@ -1,21 +1,42 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace HoldIt.Models
 {
+    /// <summary>
+    /// User: A HoldIt User
+    /// </summary>
     public class User
     {
-        public User(String email, String name, int id)
+        public User(string email, string name, string password)
         {
+            if (email == null) throw new ArgumentNullException(nameof(email));
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (password == null) throw new ArgumentNullException(nameof(password));
             this.email = email;
             this.name = name;
-            this.userID = id;
+            this.password = password;
+            UserID = num++;
         }
-        private String email { get; set; }
-        private String name { get; set; }
-        private int userID { get; }
-        private SortedList reviews;
+        public User()
+        {
+            this.email = null;
+            this.name = null;
+            this.password = null;
+            this.UserID = 0;
+        }
+
+        private static int num = 0;
+
+        public int UserID { get; set; }
+        public String email { get; set; }
+        public String name { get; set; }
+        public String password { get; set; }
+        //public List<int> reviewIDs { get; set; }
     }
 }

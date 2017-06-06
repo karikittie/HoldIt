@@ -3,6 +3,9 @@ using System.Web.Optimization;
 
 namespace HoldIt
 {
+    /// <summary>
+    /// BundleConfig: Bundles multiple files to improve load time.
+    /// </summary>
     public class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862

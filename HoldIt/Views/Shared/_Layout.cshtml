@@ -8,38 +8,42 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @if(TempData["ErrorAlert"] != null)
+    {
+        <script>
+            window.alert("@TempData["ErrorAlert"]");
+        </script>
+    }
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
-                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">more options<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                    <li>@Html.ActionLink("Listings", "ListingList", "Home")</li>
+
+                    @if (Session["userIsAuthenticated"] != null && (bool)Session["userIsAuthenticated"])
+                    {
+                        <li>@Html.ActionLink("Log out", "Logout", "User")</li>
+                    }
                 </ul>
             </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
-            </div>
+
+            @if (Session["userIsAuthenticated"] == null || !(bool)Session["userIsAuthenticated"])
+            {
+                <div id="navbar" class="collapse navbar-collapse">
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" name="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" name="password" class="form-control">
+                        </div>
+                        <button type="submit" formaction="@Url.Action("Login", "User")" formmethod="post" class="btn btn-success">Sign in</button>
+                    </form>
+                </div>
+            }
         </div>
     </nav>
 
