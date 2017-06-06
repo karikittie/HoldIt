@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HoldIt;
 using HoldIt.Controllers;
-
+///<summary>
+///HomeControllerTest: ( ADD DESCRIPTION )
+///</summary>
 namespace HoldIt.Tests.Controllers
 {
     [TestClass]
@@ -24,7 +26,9 @@ namespace HoldIt.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
+        ///<summary>
+        ///
+        ///</summary>
         [TestMethod]
         public void About()
         {
@@ -37,7 +41,9 @@ namespace HoldIt.Tests.Controllers
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         }
-
+        ///<summary>
+        ///
+        ///</summary>
         [TestMethod]
         public void Contact()
         {
