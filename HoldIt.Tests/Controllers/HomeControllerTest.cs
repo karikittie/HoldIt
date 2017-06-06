@@ -6,14 +6,17 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HoldIt;
 using HoldIt.Controllers;
-///<summary>
-///HomeControllerTest: ( ADD DESCRIPTION )
-///</summary>
+/// <summary>
+/// HomeControllerTest: ( ADD DESCRIPTION )
+/// </summary>
 namespace HoldIt.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+        ///<summary>
+        ///
+        ///</summary>
         [TestMethod]
         public void Index()
         {
@@ -26,9 +29,9 @@ namespace HoldIt.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-        ///<summary>
+        /// <summary>
         ///
-        ///</summary>
+        /// </summary>
         [TestMethod]
         public void About()
         {
