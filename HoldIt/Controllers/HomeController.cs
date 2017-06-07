@@ -26,10 +26,10 @@ namespace HoldIt.Controllers
             {
                 List<User> uList = new List<User>();
 
-                uList.Add(new User("a@a.com", "Alpah Betical", "aaaa"));
-                uList.Add(new User("b@b.com", "Beta  Betical", "bbbb"));
-                uList.Add(new User("c@c.com", "Gamma Betical", "cccc"));
-                uList.Add(new User("d@d.com", "Delta Betical", "dddd"));
+                uList.Add(new User("adrianO@hotmail.com", "Adrian O'dowell", "aaaa"));
+                uList.Add(new User("cornisnice@gmail.com", "Donisha Landes", "x9edj3#dx_corn"));
+                uList.Add(new User("candlesticks@fancies.gov", "Alaska Rainwaters", "Quin0a"));
+                uList.Add(new User("SBeticale@beticalephotos.com", "Shantrace Beticale", "cannon20d"));
 
                 Session["UserList"] = uList;
             }
@@ -41,10 +41,11 @@ namespace HoldIt.Controllers
             {
                 List<Listing> lList = new List<Listing>();
 
-                lList.Add(new Listing(0, new DateTime(2089, 11, 16), 15.25, 0, -1, "Title0", "Desc0", "Add0", false));
-                lList.Add(new Listing(1, new DateTime(2018, 12, 24), 15.25, 1, -1, "Title1", "Desc1", "Add1",false));
-                lList.Add(new Listing(2, new DateTime(2017, 7, 4), 15.25, 0, 2, "Title2", "Desc2", "Add2", true));
-                lList.Add(new Listing(3, new DateTime(2017, 6, 7), 15.25, 3, -1, "Title3", "Desc3", "Add3",false));
+                lList.Add(new Listing(0, new DateTime(2089, 11, 16), 15.25, 0, -1, "iPad Pro Release", "Release event for the new iPad pro. Secure your spot!", "450 SW Yamhill St, Portland, OR 97204", false));
+                lList.Add(new Listing(1, new DateTime(2018, 12, 24), 15.25, 1, -1, "Frank Ocean Concert", "Be one of the first ine line to see Frank Ocean at the Moda Center.", "1 N Center Ct St, Portland, OR 97227", false));
+                lList.Add(new Listing(2, new DateTime(2017, 7, 4), 15.25, 0, 2, "BrewFest in the Park", "Legendary craft brew festival at the Overlook park. Get in before it fills up.", "1599 N Fremont St, Portland, OR 97227", true));
+                lList.Add(new Listing(3, new DateTime(2017, 6, 7), 15.25, 3, -1, "Friday Dinner at Tasty n Alder", "Reservations are limited; make sure to secure your dinner plans!", "580 SW 12th Ave, Portland, OR 97205", false));
+
 
                 Session["ListingList"] = lList;
             }

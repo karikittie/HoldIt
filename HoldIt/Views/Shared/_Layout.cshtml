@@ -22,15 +22,18 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Listings", "ListingList", "Home")</li>
+                  
 
-                    @if (Session["userIsAuthenticated"] != null && (bool)Session["userIsAuthenticated"])
+                    @if (Session["userIsAuthenticated"] != null && (bool)Session["userIsAuthenticated"] == true)
                     {
+                        <li>@Html.ActionLink("User", "Index", "User")</li>
+
                         <li>@Html.ActionLink("Log out", "Logout", "User")</li>
                     }
                 </ul>
             </div>
 
-            @if (Session["userIsAuthenticated"] == null || !(bool)Session["userIsAuthenticated"])
+            @if (Session["userIsAuthenticated"] == null || (bool)Session["userIsAuthenticated"]==false)
             {
                 <div id="navbar" class="collapse navbar-collapse">
                     <form class="navbar-form navbar-right">
