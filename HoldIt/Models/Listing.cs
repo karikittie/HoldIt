@@ -22,8 +22,7 @@ namespace HoldIt.Models
             this.title = title;
             this.description = description;
             this.location = location;
-            //TODO change too confirmedBooking and add completed bookian
-            this.confirmed = false;
+            this.confirmedBooking = false;
         }
 
         public Listing(int listingId, DateTime datetime, double cost, int providerId, int customerId, string title,
@@ -40,7 +39,7 @@ namespace HoldIt.Models
             this.title = title;
             this.description = description;
             this.location = location;
-            this.confirmed = b;
+            this.confirmedBooking = b;
         }
 
         public Listing()
@@ -48,7 +47,7 @@ namespace HoldIt.Models
 
             providerID = -1;
             customerID = -1;
-            this.confirmed = false;
+            this.confirmedBooking = false;
         }
 
         public int ListingID { get; set; }
@@ -59,7 +58,7 @@ namespace HoldIt.Models
         public String title { set; get; }
         public String description { set; get; }
         public String location { set; get; }
-        public bool confirmed { set; get; }
+        public bool confirmedBooking { set; get; }
 
     }
 }

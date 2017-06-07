@@ -105,8 +105,7 @@ namespace HoldIt.Controllers
 
                 var t = TempData;
                 list = ((List<Listing>)Session["ListingList"]).Find((Listing l) => l.ListingID == listID);
-                //TODO check for provider == Customer
-                if ((list != null) && (list.customerID < 0))
+                if ((list != null) && (list.customerID < 0)&&(list.providerID != list.customerID))
                 {
                     List<Listing> tempList = (List<Listing>)Session["ListingList"];
                     int pos = tempList.FindIndex(list.Equals);
@@ -135,7 +134,7 @@ namespace HoldIt.Controllers
             {
                 List<Listing> tempList = (List<Listing>)Session["ListingList"];
                 int pos = tempList.FindIndex(list.Equals);
-                list.confirmed = true;
+                list.confirmedBooking = true;
 
                 tempList[pos] = list;
                 Session["ListingList"] = tempList;
@@ -169,7 +168,7 @@ namespace HoldIt.Controllers
             {
                 List<Listing> tempList = (List<Listing>)Session["ListingList"];
                 int pos = tempList.FindIndex(list.Equals);
-                list.confirmed = true;
+                list.confirmedBooking = true;
 
                 tempList[pos] = list;
                 Session["ListingList"] = tempList;
@@ -191,7 +190,7 @@ namespace HoldIt.Controllers
 
             list.providerID = ((User) Session["ActiveUser"]).UserID;
             list.customerID = -1;
-            list.confirmed = false;
+            list.confirmedBooking = false;
 
             List<Listing> listing;
 

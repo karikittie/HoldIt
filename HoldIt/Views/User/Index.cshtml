@@ -62,7 +62,7 @@
                     <th>Cost</th>
                     <th>Location</th>
                     <th>Is Booked</th>
-                    <th>Confirmed </th>
+                    <th>confirm Booking </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -78,11 +78,11 @@
                             <td>@item.cost.ToString()</td>
                             <td>@item.location</td>
                             <td>@((item.customerID >= 0)?"Yes":"No") </td>
-                        @if ((item.confirmed)&&(item.customerID >= 0))
+                        @if ((item.confirmedBooking)&&(item.customerID >= 0))
                         {
                             <td>Confirmed</td>
                         }
-                        else if((item.confirmed==false) && (item.customerID >= 0))
+                        else if((item.confirmedBooking==false) && (item.customerID >= 0))
                         {
                             <td> @Html.ActionLink("Confirm","Confirm","User",  new { @first = item.ListingID},null)</td>
                         }
@@ -126,8 +126,8 @@
                              <td>@item.datetime</td>
                              <td>@item.cost.ToString()</td>
                              <td>@item.location</td>
-                             <td>@((item.customerID < 0) && (item.confirmed == false)?"No":"Yes") </td>
-                             <td>@(item.confirmed?"Yes":"No") </td>
+                             <td>@((item.customerID < 0) && (item.confirmedBooking == false)?"No":"Yes") </td>
+                             <td>@(item.confirmedBooking?"Yes":"No") </td>
                          </tr>
                      }
 
