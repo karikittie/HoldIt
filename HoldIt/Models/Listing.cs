@@ -22,6 +22,7 @@ namespace HoldIt.Models
             this.title = title;
             this.description = description;
             this.location = location;
+            //TODO change too confirmedBooking and add completed bookian
             this.confirmed = false;
         }
 
