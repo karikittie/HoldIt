@@ -1,0 +1,142 @@
+﻿@using System.Activities.Statements
+@using System.Diagnostics
+@using HoldIt.Models
+@using Microsoft.Ajax.Utilities
+@{
+    ViewBag.Title = "index";
+
+    List<Listing> listings= (List<Listing>) Session["ListingList"];
+    User user = (User) Session["ActiveUser"];
+
+    if (user == null)
+    {
+        user = new User();
+    }
+
+    var a = listings.Find( l => l.providerID == user.UserID );
+    bool isProvider = a == null ? false : true;
+    a = listings.Find( l => l.customerID == user.UserID );
+    bool isCust = a == null ? false : true;
+
+
+}
+
+
+
+<h2>index</h2>
+
+
+@if ( user != null)
+{
+    <div>
+        <table class="table">
+
+            <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td> @(user.name) </td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td> @(user.email) </td>
+            </tr>
+            <tr>
+                <th scope="row">Password</th>
+                <td> @(user.password) </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    if (isProvider)
+    {
+        <div class="container">
+            <h2>Provided Listings</h2>
+            <p>These are the listings that you are providing:</p>            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date/Time </th>
+                    <th>Cost</th>
+                    <th>Location</th>
+                    <th>Is Booked</th>
+                    <th>confirm Booking </th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                @foreach (Listing item in listings){
+
+                    if(item.providerID == user.UserID)
+                    {
+                        <tr>
+                            <td>@item.title</td>
+                            <td>@item.description</td>
+                            <td>@item.datetime</td>
+                            <td>@item.cost.ToString()</td>
+                            <td>@item.location</td>
+                            <td>@((item.customerID >= 0)?"Yes":"No") </td>
+                        @if ((item.confirmedBooking)&&(item.customerID >= 0))
+                        {
+                            <td>Confirmed</td>
+                        }
+                        else if((item.confirmedBooking==false) && (item.customerID >= 0))
+                        {
+                            <td> @Html.ActionLink("Confirm","Confirm","User",  new { @first = item.ListingID},null)</td>
+                        }
+                        </tr>
+                    }
+
+                
+               }
+
+                </tbody>
+            </table>
+        </div>
+
+    }
+
+    if (isCust)
+    {
+        <div class="container">
+            <h2>Customer Listings</h2>
+            <p>These are the listings that you are wanting to patron: </p>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date/Time </th>
+                    <th>Cost</th>
+                    <th>Location</th>
+                    <th>Booked</th>
+                    <th>Confirmed </th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                @foreach (Listing item in listings){
+                    if(item.customerID == user.UserID)
+                     {
+                         <tr>
+                             <td>@item.title</td>
+                             <td>@item.description</td>
+                             <td>@item.datetime</td>
+                             <td>@item.cost.ToString()</td>
+                             <td>@item.location</td>
+                             <td>@((item.customerID < 0) && (item.confirmedBooking == false)?"No":"Yes") </td>
+                             <td>@(item.confirmedBooking?"Yes":"No") </td>
+                         </tr>
+                     }
+
+                }
+
+                </tbody>
+            </table>
+        </div>
+    }
+
+
+}

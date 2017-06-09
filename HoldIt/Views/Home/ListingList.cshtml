@@ -1,0 +1,51 @@
+﻿@using System.Collections
+@using HoldIt.Models
+@model IEnumerable<HoldIt.Models.Listing>
+    
+
+@if ((Session["userIsAuthenticated"] != null) && ((bool) Session["userIsAuthenticated"] == true) )
+{
+    <p>
+        @Html.ActionLink("Create New", "CreateListing", "User")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>Date Time</th>
+        <th>Cost </th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.datetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+            
+            @if ((Session["userIsAuthenticated"] != null) && ((bool)Session["userIsAuthenticated"] == true)
+                && (item.customerID < 0) && (((User)Session["ActiveUser"])!= null) && ( ((User)Session["ActiveUser"]).UserID !=item.providerID ))
+            {
+                @Html.ActionLink("Book","Book","User",  new { @first = item.ListingID},null)
+            }
+        </td>
+    </tr>
+}
+
+</table>
