@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HoldIt</name>
+    </assembly>
+    <members>
+        <member name="T:HoldIt.Controllers.UserController">
+            <summary>
+            UserController: Controller for User operations
+            Inherits from Controller
+            </summary>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Index">
+            <remarks>
+            This is the virtualized object containing all users from the DB 
+            </remarks>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Login(System.String,System.String)">
+            <summary>
+            Attempts to log a User into the system.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns>
+            Success: Returns a view with User home screen
+            Failure: Returns Redirect to /User/Index
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Logout">
+            <summary>
+            Logs a User out of the system
+            </summary>
+            <returns>
+            Returns Redirect to /Home/Index
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Signup(System.String,System.String,System.String,System.String)">
+            <summary>
+            Signs up a new User in the System
+            </summary>
+            <param name="email"></param>
+            <param name="name"></param>
+            <param name="password"></param>
+            <param name="passwordConfirm"></param>
+            <returns>
+            Success: returns Redirect to /User/Index
+            Failure: returns Redirect to /Home/Index
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.validUser(System.String,System.String)">
+            <summary>
+            Checks if a user with 'email' and 'password' exists in the database.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns>
+            Returns true on success, false on failure
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Book(System.Nullable{System.Int32})">
+            <summary>
+            Given a listing ID, Books a listing for a User.
+            </summary>
+            <param name="first"></param>
+            <returns>
+            Returns Redirect to /User/Index
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Confirm(System.Int32)">
+            <summary>
+            Given a Listing ID, Confirms a listing as completed
+            </summary>
+            <param name="first"></param>
+            <returns>
+            Returns redirect to /User/Index
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.UserController.Create(HoldIt.Models.Listing)">
+            <summary>
+            Creates listing
+            </summary>
+            <param name="lList"></param>
+            <returns>
+            Returns a redirect to /User/Index
+            </returns>
+        </member>
+        <member name="T:HoldIt.Controllers.HomeController">
+            <summary>
+            HomeController: ( ADD DESCRIPTION ).
+            Inherits from Controller
+            </summary>
+        </member>
+        <member name="M:HoldIt.Controllers.HomeController.MakeUsers">
+            <summary>
+            Creates example users
+            </summary>
+        </member>
+        <member name="M:HoldIt.Controllers.HomeController.MakeListings">
+            <summary>
+            Creates example listings
+            </summary>
+        </member>
+        <member name="M:HoldIt.Controllers.HomeController.About">
+            <returns>
+            Returns a view containing User information
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.HomeController.Contact">
+            <returns>
+            Returns a view containing User contacts
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.HomeController.SearchListing(System.String)">
+            <summary>
+            Searches active listings for provided keyword
+            </summary>
+            <param name="search"></param>
+            <returns>
+            Returns a view containing matching listing(s).
+            </returns>
+        </member>
+        <member name="M:HoldIt.Controllers.HomeController.ListingList">
+            <returns>
+            Returns a view containing active listings
+            </returns>
+        </member>
+        <member name="T:HoldIt.Models.User">
+            <summary>
+            User: A HoldIt User
+            </summary>
+        </member>
+        <member name="T:HoldIt.Models.Event">
+            <summary>
+            Event: A HoldIt featured event.
+            </summary>
+        </member>
+        <member name="T:HoldIt.Models.Listing">
+            <summary>
+            Listing: An availible line holding service posted by a provider.
+            </summary>
+        </member>
+        <member name="T:HoldIt.Models.Review">
+            <summary>
+            Review: A customer review of their interaction with a provider.
+            </summary>
+        </member>
+    </members>
+</doc>
